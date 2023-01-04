@@ -1,39 +1,25 @@
-import { useEffect, useState } from "react";
-import { Container, Grow, Grid } from "@mui/material";
-import { getPosts } from "./actions/posts";
-import Posts from "./Components/Posts/Posts";
-import Form from "./Components/Form/Form";
-import { useDispatch } from "react-redux";
+import { Container } from "@mui/material";
 import Navbar from "./Components/Navbar/Navbar";
+import Home from "./Components/Home/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Auth from "./Components/Auth/Auth";
+// import { Switch } from "react-router";
+// import Test from "./Components/Test/Test";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const [currentId, setCurrentId] = useState(0);
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
   return (
-    <Container maxWidth="lg">
-      <Navbar />
-      <Grow in>
-        <Container>
-          <Grid
-            container
-            justify="space-between"
-            alignItems="stretch"
-            spacing={3}
-          >
-            <Grid item xs={12} sm={7}>
-              <Posts setCurrentId={setCurrentId} />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId} />
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
-    </Container>
+    <Router>
+      <Container maxWidth="lg">
+        <Navbar />
+        {/* <Home /> */}
+        {/* <Test />
+        <Auth /> */}
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 };
 

@@ -6,11 +6,15 @@ import { Grid, Skeleton } from "@mui/material";
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts); //state is the global store and 'posts' is from reducers
 
-  console.log("posts", posts);
   const classes = useStyles();
 
   return !posts.length ? (
-    <Skeleton variant="rectangular" width={210} height={210} />
+    <Skeleton
+      variant="rectangular"
+      width={210}
+      height={210}
+      sx={{ bgcolor: "grey.900" }}
+    />
   ) : (
     <>
       <Grid
